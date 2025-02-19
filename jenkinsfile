@@ -1,21 +1,43 @@
 pipeline {
     agent any
 
+    environment {
+        DEPLOY_ENV = 'staging'
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building...'
+                // Add actual build commands here
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
+                // Add actual test commands here
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo "Deploying to ${env.DEPLOY_ENV}..."
+                // Add actual deploy commands here
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+            // Add notification or other success actions here
+        }
+        failure {
+            echo 'Pipeline failed!'
+            // Add notification or other failure actions here
+        }
+        always {
+            echo 'Cleaning up...'
+            // Add cleanup steps here
         }
     }
 }
